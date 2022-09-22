@@ -56,8 +56,8 @@ io.on("connection", (socket) => {
   socket.on("delta-send", (deltaSend) => {
     io.emit("delta-recieve", deltaSend);
   });
-  socket.on("gameOver-send", (start) => {
-    io.emit("gameOver-recieve", start);
+  socket.on("gameOver-send", () => {
+    socket.emit("gameOver-recieve");
   });
   socket.on("getHeading", () => {
     var test = 0;
