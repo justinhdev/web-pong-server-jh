@@ -10,7 +10,7 @@ const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server, {
   cors: {
-    origin: "http://127.0.0.1:5501"
+    origin: "https://web-2pong.netlify.app/"
   }
 });
 const PORT = process.env.PORT || 3000;
