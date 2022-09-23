@@ -88,8 +88,6 @@ io.on("connection", (socket) => {
   socket.on("scores-send", (p1score, p2score) => {
     io.emit("scores-recieve", (p1score, p2score));
   })
-
-
   socket.on("disconnect", () => {
     rdycount = 0;
     rdycount2 = 0;
