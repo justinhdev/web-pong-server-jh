@@ -11,7 +11,7 @@ const { Server } = require("socket.io");
 const io = new Server(server, {
   cors: {
     
-    origin: "https://web-2pong.netlify.app"
+    origin: "http://127.0.0.1:5501"
   }
 });
 const PORT = process.env.PORT || 3000;
@@ -66,6 +66,13 @@ io.on("connection", (socket) => {
   })
   socket.on("missAudio", () => {
     io.emit("missAudio-send");
+  })
+  var rdycount = 0;
+  socket.on("ready-send", () => {
+    rdycount++;
+    if (rdycount > 1) {
+      io.emit("ready-recieve");
+    }
   })
   socket.on("disconnect", () => {
     spot = index.indexOf(socket.id);
