@@ -74,8 +74,12 @@ io.on("connection", (socket) => {
       io.emit("ready-recieve");
       rdycount = 0;
     }
+    else {
+      io.emit("ready-waiting");
+    }
   })
   socket.on("disconnect", () => {
+    rdycount = 0;
     spot = index.indexOf(socket.id);
     index.splice(spot, 1);
     io.emit("getIndex", index);
