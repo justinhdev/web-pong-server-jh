@@ -33,6 +33,7 @@ server.listen(PORT, () => {
 var index = new Array();
 var spot;
 var rdycount = 0;
+var rdycount2 = 0;
 
 io.on("connection", (socket) => {
   
@@ -69,10 +70,16 @@ io.on("connection", (socket) => {
     io.emit("missAudio-send");
   })
   socket.on("ready-send", () => {
-    rdycount++;
-    if (rdycount > 1) {
+    if (socket.id == index[0]){
+      rdycount = 1;
+    }
+    else {
+      rdycount2 = 1;
+    }
+    if (rdycount == 1 && rdycount2 == 1) {
       io.emit("ready-recieve");
       rdycount = 0;
+      rdycount2 = 0;
     }
     else {
       io.emit("ready-waiting");
@@ -80,6 +87,7 @@ io.on("connection", (socket) => {
   })
   socket.on("disconnect", () => {
     rdycount = 0;
+    rdycount2 = 0;
     spot = index.indexOf(socket.id);
     index.splice(spot, 1);
     io.emit("getIndex", index);
