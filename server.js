@@ -44,8 +44,8 @@ io.on("connection", (socket) => {
   socket.on("mousePosition-send2", (mousePos) => {
     io.emit("mousePosition-recieve2", mousePos);
   });
-  socket.on("roundOver-send", () => {
-    io.emit("roundOver-recieve");
+  socket.on("roundOver-send", (pscore, cscore) => {
+    io.emit("roundOver-recieve", pscore, cscore);
   });
   socket.on("getHeading", () => {
     var test = 0;
@@ -79,9 +79,6 @@ io.on("connection", (socket) => {
     else {
       io.emit("ready-waiting");
     }
-  })
-  socket.on("scores-send", (p1score, p2score) => {
-    io.emit("scores-recieve", (p1score, p2score));
   })
   socket.on("disconnect", () => {
     rdycount = 0;
