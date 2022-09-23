@@ -16,15 +16,10 @@ const io = new Server(server, {
 });
 const PORT = process.env.PORT || 3000;
 /*origin: "https://web-2pong.netlify.app"*/
-//app.use(express.static('public'));
 
 app.get('/', (req, res) => {
   res.send("server is up");
 });
-
-/*app.get('/client/script.js', (req, res) => {
-  res.sendFile('/home/huginn/code/online-pong/client/script.js');
-});*/
 
 server.listen(PORT, () => {
   
