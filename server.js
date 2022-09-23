@@ -45,7 +45,7 @@ io.on("connection", (socket) => {
     io.emit("mousePosition-recieve2", mousePos);
   });
   socket.on("roundOver-send", () => {
-    socket.emit("roundOver-recieve");
+    io.emit("roundOver-recieve");
   });
   socket.on("getHeading", () => {
     var test = 0;
