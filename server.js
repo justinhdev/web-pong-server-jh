@@ -32,6 +32,7 @@ server.listen(PORT, () => {
 
 var index = new Array();
 var spot;
+var rdycount = 0;
 
 io.on("connection", (socket) => {
   
@@ -67,11 +68,11 @@ io.on("connection", (socket) => {
   socket.on("missAudio", () => {
     io.emit("missAudio-send");
   })
-  var rdycount = 0;
   socket.on("ready-send", () => {
     rdycount++;
     if (rdycount > 1) {
       io.emit("ready-recieve");
+      rdycount = 0;
     }
   })
   socket.on("disconnect", () => {
