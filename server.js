@@ -34,6 +34,7 @@ var index = new Array();
 var spot;
 
 io.on("connection", (socket) => {
+  
   index.push(socket.id);
   io.emit("getIndex", index);
 
@@ -45,16 +46,6 @@ io.on("connection", (socket) => {
   });
   socket.on("mousePosition-send2", (mousePos) => {
     io.emit("mousePosition-recieve2", mousePos);
-  });
-  socket.on("ballreset-send", (heading) => {
-    io.emit("ballreset-recieve", heading);
-  });
-  socket.on("ballUpdate-send", (rect1) => {
-    io.emit("ballUpdate-recieve", rect1);
-  });
-
-  socket.on("delta-send", (deltaSend) => {
-    io.emit("delta-recieve", deltaSend);
   });
   socket.on("gameOver-send", () => {
     socket.emit("gameOver-recieve");
@@ -70,16 +61,13 @@ io.on("connection", (socket) => {
     }
     io.emit("getHeading-send", heading);
   });
+  socket.on("hitAudio", () => {
+    io.emit("hitAudio-send");
+  })
   socket.on("disconnect", () => {
     spot = index.indexOf(socket.id);
     index.splice(spot, 1);
     io.emit("getIndex", index);
-  });
-  socket.on("playerpaddle", (rect) => {
-    io.emit("playerpaddle-recieve", (rect));
-  });
-  socket.on("computerpaddle", (rect) => {
-    io.emit("computerpaddle-recieve", (rect));
   });
 });
 
