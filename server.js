@@ -64,6 +64,9 @@ io.on("connection", (socket) => {
   socket.on("hitAudio", () => {
     io.emit("hitAudio-send");
   })
+  socket.on("missAudio", () => {
+    io.emit("missAudio-send");
+  })
   socket.on("disconnect", () => {
     spot = index.indexOf(socket.id);
     index.splice(spot, 1);
